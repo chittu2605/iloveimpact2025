@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/adp/static/css/main.9000a263.chunk.css",
+    "main.js": "/adp/static/js/main.f043bccf.chunk.js",
+    "main.js.map": "/adp/static/js/main.f043bccf.chunk.js.map",
+    "runtime-main.js": "/adp/static/js/runtime-main.22e6706c.js",
+    "runtime-main.js.map": "/adp/static/js/runtime-main.22e6706c.js.map",
+    "static/css/2.2e645caa.chunk.css": "/adp/static/css/2.2e645caa.chunk.css",
+    "static/js/2.66c295a3.chunk.js": "/adp/static/js/2.66c295a3.chunk.js",
+    "static/js/2.66c295a3.chunk.js.map": "/adp/static/js/2.66c295a3.chunk.js.map",
+    "index.html": "/adp/index.html",
+    "precache-manifest.7eac30943f1472e917690850d87c3023.js": "/adp/precache-manifest.7eac30943f1472e917690850d87c3023.js",
+    "service-worker.js": "/adp/service-worker.js",
+    "static/css/2.2e645caa.chunk.css.map": "/adp/static/css/2.2e645caa.chunk.css.map",
+    "static/css/main.9000a263.chunk.css.map": "/adp/static/css/main.9000a263.chunk.css.map",
+    "static/js/2.66c295a3.chunk.js.LICENSE.txt": "/adp/static/js/2.66c295a3.chunk.js.LICENSE.txt",
+    "static/media/impact1.png": "/adp/static/media/impact1.f694e041.png",
+    "static/media/now-ui-dashboard.scss?v1.4.0": "/adp/static/media/nucleo-outline.8ebec31f.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.22e6706c.js",
+    "static/css/2.2e645caa.chunk.css",
+    "static/js/2.66c295a3.chunk.js",
+    "static/css/main.9000a263.chunk.css",
+    "static/js/main.f043bccf.chunk.js"
+  ]
+}

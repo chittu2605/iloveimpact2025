@@ -1,0 +1,48 @@
+﻿# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.test
+.env.*.local
+
+# Build outputs
+/dist
+/build
+
+# Logs
+logs/
+*.log
+nohup.out
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs / editors
+.vscode/
+.idea/
+
+# Temp
+tmp/
+temp/
+*.tmp
+
+# Uploads / runtime
+upload/
+static/uploads/
+
+# Misc
+coverage/
+coverage-final.json
+
+# If you have local DB files
+*.sqlite
+*.db
+
+# Keep lockfile committed (recommended)
+# package-lock.json
