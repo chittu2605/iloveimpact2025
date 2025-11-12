@@ -9,6 +9,10 @@ yarn-error.log*
 .env.local
 .env.test
 .env.*.local
+# Environment and sensitive files
+.env
+.env_test
+
 
 # Build outputs
 /dist
