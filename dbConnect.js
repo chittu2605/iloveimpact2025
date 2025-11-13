@@ -1,55 +1,43 @@
-var mysql = require("mysql2");
-const db_config = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  connectionLimit: 10,
-  multipleStatements: true,
-  charset: "utf8mb4",
-};
+// dbConnect.js  (replace existing connect code with this safe pattern)
+const mysql = require('mysql2/promise'); // uses mysql2 promise API
+const util = require('util');
 
-var connection;
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.env;
 
-function handleDisconnect() {
-  connection = mysql.createPool(db_config); // Recreate the connection, since
-  // the old one cannot be reused.
+let pool;
 
-  // connection.connect(function(err) {              // The server is either down
-  //   if(err) {                                     // or restarting (takes a while sometimes).
-  //     console.log('error when connecting to db:', err);
-  //     setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-  //   }                                     // to avoid a hot loop, and to allow our node script to
-  // });                                     // process asynchronous requests in the meantime.
-  // If you're also serving http, display a 503 error.
-  connection.on("error", function (err) {
-    console.log("db error", err);
-    if (err.code === "PROTOCOL_CONNECTION_LOST") {
-      // Connection to the MySQL server is usually
-      handleDisconnect(); // lost due to either server restart, or a
-    } else {
-      // connnection idle timeout (the wait_timeout
-      throw err; // server variable configures this)
-    }
-  });
+async function createPool() {
+  try {
+    pool = mysql.createPool({
+      host: DB_HOST || '127.0.0.1',
+      user: DB_USER || 'root',
+      password: DB_PASSWORD || '',
+      database: DB_DATABASE || 'impact',
+      port: DB_PORT ? Number(DB_PORT) : 3306,
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+    });
+    // Test connection
+    await pool.query('SELECT 1');
+    console.log('MySQL pool created and test query succeeded');
+  } catch (err) {
+    console.error('MySQL initial connection failed:', err.message || err);
+    // don't throw — schedule retry
+    setTimeout(createPool, 5000); // retry after 5 seconds
+  }
 }
 
-handleDisconnect();
-
-connection.query(
-  `USE ${process.env.DB_DATABASE};`,
-  async (error, results, fields) => {
-    if (error) console.log(error);
+function getPool() {
+  if (!pool) {
+    throw new Error('MySQL pool not initialized yet');
   }
-);
+  return pool;
+}
 
-const moment = require("moment");
+createPool(); // start attempt immediately
 
-// connection.connect();
-
-// connection.query('SELECT * from tbl_user', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log('The solution is: ', results);
-// });
-
-module.exports = connection;
+module.exports = {
+  getPool,
+  createPool,
+};
